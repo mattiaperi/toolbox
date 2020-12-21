@@ -1,4 +1,8 @@
 FROM alpine:3.12.3
 
-RUN apt-get update
-RUN apt-get install -y dnsutils
+MAINTAINER "Mattia Peri"
+
+WORKDIR /app
+
+RUN apk add --update --no-cache bind-tools
+
