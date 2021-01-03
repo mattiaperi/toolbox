@@ -16,11 +16,14 @@ RUN apk --no-cache --update --verbose add \
        bash \
        tcpdump \
        curl \
+       jq \
     && rm -rf /var/cache/apk/* /tmp/* 
 
 RUN addgroup --gid 1100 toolbox \
     && adduser --disabled-password -u 1100 -g toolbox -G toolbox -G wheel -H -s /bin/bash toolbox \
     && echo 'toolbox ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers 
 USER toolbox
+ENV PS1=toolbox# 
 
+ENTRYPOINT ["/bin/bash"]
 CMD ["./main"]

@@ -12,6 +12,7 @@ Please find hereunder the list of packages on top of the alpine base image:
 - bash
 - tcpdump
 - curl
+- jq
 
 ## custom tool
 The image comes with a custom tool in golang. The purpose of the tool is to create a simple webservice and print the following information:
@@ -45,7 +46,11 @@ $ git add .
 $ git commit -m "Fix dnstools"
 $ git push origin main
 
-$ docker build -t mattiaperi/toolbox:latest -t mattiaperi/toolbox:0.0.5 -f Dockerfile .
-$ docker push mattiaperi/toolbox:0.0.5
+$ docker build -t mattiaperi/toolbox:latest -t mattiaperi/toolbox:0.0.6 -f Dockerfile .
+$ docker push mattiaperi/toolbox:0.0.6
 $ docker push mattiaperi/toolbox:latest
 ```
+
+## References
+- 
+- https://github.com/christianhxc/prometheus-tutorial/
