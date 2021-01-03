@@ -22,8 +22,8 @@ RUN apk --no-cache --update --verbose add \
 RUN addgroup --gid 1100 toolbox \
     && adduser --disabled-password -u 1100 -g toolbox -G toolbox -G wheel -H -s /bin/bash toolbox \
     && echo 'toolbox ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers 
-USER toolbox
-ENV PS1=toolbox# 
 
-ENTRYPOINT ["/bin/bash"]
+USER toolbox
+ENV PS1="\h:\[\e[0;32m\]\w\[\e[m\] \u \$ " 
+
 CMD ["./main"]

@@ -52,5 +52,5 @@ $ docker push mattiaperi/toolbox:latest
 ```
 
 ## References
-- 
-- https://github.com/christianhxc/prometheus-tutorial/
+- https://github.com/GoogleCloudPlatform/kubernetes-engine-samples/blob/master/hello-app/main.go
+- https://github.com/christianhxc/prometheus-tutorial/blob/master/src/random/main.go
