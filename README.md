@@ -37,20 +37,22 @@ $ curl -XGET -H'Custom-Header: true' http://localhost:8080
 $ kubectl run -it --rm --restart=Never --image=mattiaperi/toolbox:latest toolbox -n kube-system -- /bin/bash
 # Example of commands:
 $ nc -vz -w1 google.com 443
-$ curl -XGET -H'Custom-Header: true' http://google.com:443
+$ curl -XGET -H'Custom-Header: true' https://google.com:443
 $ ./main # to start the custom tool
 ```
+
+## References
+- https://github.com/GoogleCloudPlatform/kubernetes-engine-samples/blob/master/hello-app/main.go
+- https://github.com/christianhxc/prometheus-tutorial/blob/master/src/random/main.go
+
+
 ## TO BE REMOVED SOON OR LATER - JUST MY REF UNTIL I CREATE THE Makefile
 ```bash
 $ git add .
-$ git commit -m "Fix dnstools"
+$ git commit -m "Fixed something"
 $ git push origin main
 
 $ docker build -t mattiaperi/toolbox:latest -t mattiaperi/toolbox:0.0.6 -f Dockerfile .
 $ docker push mattiaperi/toolbox:0.0.6
 $ docker push mattiaperi/toolbox:latest
 ```
-
-## References
-- https://github.com/GoogleCloudPlatform/kubernetes-engine-samples/blob/master/hello-app/main.go
-- https://github.com/christianhxc/prometheus-tutorial/blob/master/src/random/main.go
