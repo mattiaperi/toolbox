@@ -44,15 +44,3 @@ $ ./main # to start the custom tool
 ## References
 - https://github.com/GoogleCloudPlatform/kubernetes-engine-samples/blob/master/hello-app/main.go
 - https://github.com/christianhxc/prometheus-tutorial/blob/master/src/random/main.go
-
-
-## TO BE REMOVED SOON OR LATER - JUST MY REF UNTIL I CREATE THE Makefile
-```bash
-$ git add .
-$ git commit -m "Fixed something"
-$ git push origin main
-
-$ docker build -t mattiaperi/toolbox:latest -t mattiaperi/toolbox:0.0.6 -f Dockerfile .
-$ docker push mattiaperi/toolbox:0.0.6
-$ docker push mattiaperi/toolbox:latest
-```
