@@ -60,7 +60,7 @@ help:  ## Display this help
 git-push: ## Git push (i.e. make git-push TAG="v0.0.6" GIT_COMMENT="Update README.md")
 	git add .
 	git commit -m "${GIT_COMMENT}"
-	git tag -a "${TAG}" -m "${GIT_COMMENT}
+	git tag -a "${TAG}" -m "${GIT_COMMENT}"
 	git push origin main --tags
 
 docker-build: ## Docker image build (i.e. make docker-build TAG="v0.0.6")
