@@ -62,6 +62,7 @@ git-push: ## Git push (i.e. make git-push TAG="v0.0.6" GIT_COMMENT="Update READM
 	git commit -m "${GIT_COMMENT}"
 	git tag -a "${TAG}" -m "${GIT_COMMENT}"
 	git push origin main --tags
+	git tag -ln
 
 docker-build: ## Docker image build (i.e. make docker-build TAG="v0.0.6")
 	docker build -t ${DOCKER_TAG_VERS} -t ${DOCKER_TAG_LATEST} -f Dockerfile .
