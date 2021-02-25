@@ -120,7 +120,7 @@ aws-ecr-login: ## AWS ECR login aws-cli
 git-push: ## Git push            (i.e. make git-push TAG="v0.0.7" GIT_COMMENT="Update README.md")
 #bash -c '[[ -z `git status -s` ]]'
 	git commit -am "${GIT_COMMENT}"
-	git tag -a "${VERSION}" -m "${GIT_COMMENT}"
+	git tag -a "v${VERSION}" -m "${GIT_COMMENT}"
 	git push origin main --tags
 	git tag -ln
 
