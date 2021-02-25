@@ -55,7 +55,7 @@ ifndef TAG
 endif
 
 DOCKER_TAG_VERS     := ${DOCKER_REPOSITORY}:${VERSION:v%=%} # Strip the "v" version prefix
-ifneq ($(BRANCH_NAME),main master)
+ifeq ($(BRANCH_NAME),main master)
 DOCKER_TAG_VERS     := ${DOCKER_REPOSITORY}:${VERSION:v%=%}-SNAPSHOT # Strip the "v" version prefix and add -SNAPSHOT suffix
 endif
 
@@ -88,6 +88,7 @@ debug:
 	@echo "GIT_LAST_TAG_SEMVER_MAJOR=${GIT_LAST_TAG_SEMVER_MAJOR}"
 	@echo "GIT_LAST_TAG_SEMVER_MINOR=${GIT_LAST_TAG_SEMVER_MINOR}"
 	@echo "GIT_LAST_TAG_SEMVER_PATCH=${GIT_LAST_TAG_SEMVER_PATCH}"
+	@echo "DOCKER_TAG_VERS=${DOCKER_TAG_VERS}"
 
 help:  ## Display this help
 	@echo '================================'
@@ -125,9 +126,6 @@ git-push: ## Git push            (i.e. make git-push TAG="v0.0.7" GIT_COMMENT="U
 
 docker-push: ## Docker image push   (i.e. make docker-push TAG="v0.0.7")
 	$(info Make: Pushing "$(VERSION)" tagged image.)
-	# ifeq ($(filter $(BRANCH_NAME),main master),)
-	#   $(error The BRANCH_NAME is not main or master.)
-	# endif
 	docker push ${DOCKER_TAG_VERS}
 	@[ "$(BRANCH_NAME)" == "main" ] && docker push ${DOCKER_TAG_LATEST} || ( echo "$(BRANCH_NAME) is not "main" branch, skipping"; exit 0 )
 
