@@ -2,9 +2,11 @@ FROM golang:latest as builder
 WORKDIR /build
 
 ADD main.go /build/main.go
+# https://github.com/golang/go/issues/31997#issuecomment-782864390
+RUN go env -w GO111MODULE=auto
 RUN go get -d
 # CGO_ENABLE=0 creates a standalone binary which is ideal for docker images
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o main .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o main .
 
 
 FROM alpine:3.12.3
