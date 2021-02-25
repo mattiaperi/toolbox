@@ -3,7 +3,8 @@ WORKDIR /build
 
 ADD main.go /build/main.go
 RUN go get -d
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o main .
+# CGO_ENABLE=0 creates a standalone binary which is ideal for docker images
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o main .
 
 
 FROM alpine:3.12.3
