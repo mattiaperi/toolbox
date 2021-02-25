@@ -53,7 +53,7 @@ ifdef TAG
 endif
 ifndef TAG
   #$(info The TAG variable is missing, therefore is automatically calculated incrementing by 1 the TAG patch integer)
-  VERSION := ${GIT_LAST_TAG_SEMVER_MAJOR}.${GIT_LAST_TAG_SEMVER_MINOR}.${GIT_NEXT_TAG_SEMVER_PATCH}
+  VERSION := v${GIT_LAST_TAG_SEMVER_MAJOR}.${GIT_LAST_TAG_SEMVER_MINOR}.${GIT_NEXT_TAG_SEMVER_PATCH}
 endif
 
 DOCKER_TAG_VERS     := ${DOCKER_REPOSITORY}:${VERSION:v%=%} # Strip the "v" version prefix
