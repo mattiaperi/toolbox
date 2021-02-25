@@ -24,6 +24,8 @@ BRANCH_NAME         ?= $(shell git rev-parse --abbrev-ref HEAD)
 # GIT_ROOTDIR         = $(shell git rev-parse --show-toplevel)
 
 # Manage automatically semver
+DATE                 = $(shell date +'%Y.%m.%d')
+GIT_COMMENT_DEFAULT  = $(DATE) $(BRANCH_NAME)
 GIT_LAST_TAG_COMMIT := $(shell git rev-list --abbrev-commit --tags --max-count=1)
 GIT_LAST_TAG        := $(shell git describe --abbrev=0 --tags ${GIT_LAST_TAG_COMMIT} 2>/dev/null || true)
 GIT_LAST_TAG_SEMVER := $(GIT_LAST_TAG:v%=%)
@@ -61,6 +63,13 @@ endif
 
 DOCKER_TAG_LATEST   := ${DOCKER_REPOSITORY}:latest
 
+# Manage automatically git commit message
+ifdef COMMENT
+  GIT_COMMENT := ${COMMENT}
+endif
+ifndef COMMENT
+  GIT_COMMENT := ${GIT_COMMENT_DEFAULT}
+endif
 
 #--- functions ---  
 
@@ -117,7 +126,7 @@ aws-ecr-login: ## AWS ECR login aws-cli
 	$(eval AWS_ACCOUNT_ID=$(shell aws sts get-caller-identity --query Account --output text))
 	aws ecr get-login-password --region $(AWS_DEFAULT_REGION) | docker login --password-stdin --username AWS "$(AWS_ACCOUNT_ID).dkr.ecr.$(AWS_DEFAULT_REGION).amazonaws.com"
 
-git-push: ## Git push            (i.e. make git-push TAG="v0.0.7" GIT_COMMENT="Update README.md")
+git-push: ## Git push            (i.e. make git-push TAG="v0.0.7" COMMENT="Update README.md")
 #bash -c '[[ -z `git status -s` ]]'
 	git commit -am "${GIT_COMMENT}"
 	git tag -a "${VERSION}" -m "${GIT_COMMENT}"
