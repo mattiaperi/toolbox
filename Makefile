@@ -108,12 +108,12 @@ help:  ## Display this help
 	@echo '- aws-cli (optional)            '
 	@echo '================================'
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-28s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
-	@echo '================================================'
-	@echo 'WORKFLOW:                                       '
-	@echo '- make docker-build                             '
-	@echo '- make git-push COMMENT="Add sudo package"      '
-	@echo '- make docker-push                              '
-	@echo '================================================'
+	@echo '=============================================================='
+	@echo 'WORKFLOW:                                                     '
+	@echo '- make docker-build TAG="v0.0.21"                             '
+	@echo '- make git-push TAG="v0.0.21" COMMENT="Add sudo package"      '
+	@echo '- make docker-push TAG="v0.0.21"                              '
+	@echo '=============================================================='
 
 local-dev: ## Local development
 	go run main.go
