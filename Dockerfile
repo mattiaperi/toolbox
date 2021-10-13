@@ -20,13 +20,32 @@ RUN apk --no-cache --update --verbose add \
        tcpdump \
        curl \
        jq \
+       tshark \
+       py3-jwt \
     && rm -rf /var/cache/apk/* /tmp/* 
+
+# kubectl
+RUN curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+RUN chmod u+x ./kubectl \
+    && mv ./kubectl /usr/local/bin/kubectl
+RUN kubectl version --client
+
+# aws-cli
+RUN apk add --no-cache \
+        python3 \
+        py3-pip \
+    && pip3 install --upgrade pip \
+    && pip3 install \
+        awscli \
+    && rm -rf /var/cache/apk/*
+RUN aws --version
 
 RUN addgroup --gid 1100 toolbox \
     && adduser --disabled-password -u 1100 -g toolbox -G toolbox -G wheel -H -s /bin/bash toolbox \
     && echo 'toolbox ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers 
 
-USER toolbox
+USER 1100:1100
+
 ENV PS1="\h:\[\e[0;32m\]\w\[\e[m\] \u \$ " 
 
 CMD ["./main"]

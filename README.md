@@ -13,6 +13,10 @@ Please find hereunder the list of packages on top of the alpine base image:
 - tcpdump
 - curl
 - jq
+- kubectl
+- aws-cli
+- tshark
+- py3-jwt
 
 ## custom tool
 The image comes with a custom tool in golang. The purpose of the tool is to create a simple webservice and print the following information:
