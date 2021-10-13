@@ -22,6 +22,7 @@ RUN apk --no-cache --update --verbose add \
        jq \
        tshark \
        py3-jwt \
+       sudo \
     && rm -rf /var/cache/apk/* /tmp/* 
 
 # kubectl
@@ -42,7 +43,8 @@ RUN aws --version
 
 RUN addgroup --gid 1100 toolbox \
     && adduser --disabled-password -u 1100 -g toolbox -G toolbox -G wheel -H -s /bin/bash toolbox \
-    && echo 'toolbox ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers 
+    && echo 'toolbox ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers \
+    && echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel
 
 USER 1100:1100
 

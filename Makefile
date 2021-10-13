@@ -108,11 +108,17 @@ help:  ## Display this help
 	@echo '- aws-cli (optional)            '
 	@echo '================================'
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[36m%-28s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
+	@echo '================================'
+	@echo 'WORKFLOW:                       '
+	@echo '- docker-build                  '
+	@echo 'WORKFLOW                        '
+	@echo 'WORKFLOW                        '
+	@echo '================================'
 
 local-dev: ## Local development
 	go run main.go
 
-docker-build: ## Docker image build  (i.e. make docker-build TAG="v0.0.7")
+docker-build: ## Docker image build  (i.e. 'make docker-build' (TAG automatically added SEMVER_PATCH+1) or 'make docker-build TAG="v0.0.7"')
 	$(info Make: Building docker image "$(VERSION)".)
 	docker build -t $(DOCKER_TAG_VERS) -f Dockerfile .
 	@[ "$(BRANCH_NAME)" == "main" ] && docker build -t $(DOCKER_TAG_LATEST) -f Dockerfile . || ( echo "$(BRANCH_NAME) is not "main" branch, skipping"; exit 0 )
