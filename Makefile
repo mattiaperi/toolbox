@@ -117,9 +117,9 @@ docker-build: ## Docker image build  (i.e. make docker-build TAG="v0.0.7")
 	docker build -t $(DOCKER_TAG_VERS) -f Dockerfile .
 	@[ "$(BRANCH_NAME)" == "main" ] && docker build -t $(DOCKER_TAG_LATEST) -f Dockerfile . || ( echo "$(BRANCH_NAME) is not "main" branch, skipping"; exit 0 )
 
-docker-hub-login: ## Docker Hub login    (i.e. make login TAG="v0.0.7" DOCKER_ACCOUNT_NAME=username DOCKER_ACCOUNT_PASSWORD=password)
+docker-hub-login: ## Docker Hub login    (i.e. make login DOCKER_ACCOUNT_NAME=username DOCKER_TOKEN=token)
 	$(info Make: Login to Docker Hub.)
-	@docker login -u $(DOCKER_ACCOUNT_NAME) -p $(DOCKER_ACCOUNT_PASSWORD)
+	@docker login -u $(DOCKER_ACCOUNT_NAME) -p $(DOCKER_TOKEN)
 
 aws-ecr-login: ## AWS ECR login aws-cli
 	$(info Make: Login to AWS ECR.)
