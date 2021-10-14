@@ -27,7 +27,7 @@ RUN apk --no-cache --update --verbose add \
 
 # kubectl
 RUN curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
-RUN chmod u+x ./kubectl \
+RUN chmod +x ./kubectl \
     && mv ./kubectl /usr/local/bin/kubectl
 RUN kubectl version --client
 
@@ -41,6 +41,12 @@ RUN apk add --no-cache \
     && rm -rf /var/cache/apk/*
 RUN aws --version
 
+# hey
+RUN curl -L -o hey "https://hey-release.s3.us-east-2.amazonaws.com/hey_linux_amd64"
+RUN chmod +x ./hey \
+    && mv ./hey /usr/local/bin/hey
+
+# user
 RUN addgroup --gid 1100 toolbox \
     && adduser --disabled-password -u 1100 -g toolbox -G toolbox -G wheel -H -s /bin/bash toolbox \
     && echo 'toolbox ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers \
