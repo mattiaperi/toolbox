@@ -9,7 +9,7 @@ RUN go get -d
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o main .
 
 
-FROM alpine:3.12.3
+FROM alpine:3.13
 LABEL maintainer "Mattia Peri <mattia@mattiaperi.it>"
 WORKDIR /app
 
