@@ -23,6 +23,7 @@ RUN apk --no-cache --update --verbose add \
        tshark \
        py3-jwt \
        sudo \
+       mysql-client \
     && rm -rf /var/cache/apk/* /tmp/* 
 
 # kubectl
